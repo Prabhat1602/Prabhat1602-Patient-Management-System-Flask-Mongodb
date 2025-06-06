@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Patient Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id="message" class="message" style="display: none;"></div>
+    
+    <div class="sidebar">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+            <h2>Healthcare</h2>
+        </div>
+        <nav>
+            <ul>
+                <li class="active"><a href="#">Dashboard</a></li>
+                </ul>
+        </nav>
+        <button id="logoutButton" class="logout-btn">Logout</button>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <h1>Patient Management Dashboard</h1>
+            <div id="loadingSpinner" class="spinner-container" style="display:none;">
+                <div class="spinner"></div>
+            </div>
+            </header>
+
+        <section class="patient-form-section card">
+            <h2 id="formTitle">Add New Patient</h2>
+            <form id="patientForm">
+                <input type="hidden" id="patientId"> <div class="form-row">
+                    <div class="form-group">
+                        <label for="patientName">Name:</label>
+                        <input type="text" id="patientName" name="name" required>
+                        <span class="error-message" id="patientNameError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="patientAge">Age:</label>
+                        <input type="number" id="patientAge" name="age" required>
+                        <span class="error-message" id="patientAgeError"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="patientGender">Gender:</label>
+                        <select id="patientGender" name="gender" required>
+                            <option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <span class="error-message" id="patientGenderError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="patientDepartment">Department:</label>
+                        <input type="text" id="patientDepartment" name="department" required>
+                        <span class="error-message" id="patientDepartmentError"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="patientPhone">Phone:</label>
+                        <input type="text" id="patientPhone" name="phone">
+                        <span class="error-message" id="patientPhoneError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="patientEmail">Email:</label>
+                        <input type="email" id="patientEmail" name="email">
+                        <span class="error-message" id="patientEmailError"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="patientPrescriptions">Current Prescriptions (comma-separated):</label>
+                    <input type="text" id="patientPrescriptions" name="current_prescriptions">
+                </div>
+                <div class="form-group">
+                    <label for="patientMedicalHistory">Medical History (comma-separated):</label>
+                    <input type="text" id="patientMedicalHistory" name="medical_history">
+                </div>
+                <div class="form-actions">
+                    <button type="submit" id="savePatientButton" class="btn primary">Save Patient</button>
+                    <button type="button" id="cancelEditButton" class="btn secondary" style="display:none;">Cancel Edit</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="patient-list-section card">
+            <h2>Patient List</h2>
+            <div class="search-bar">
+                <input type="text" id="searchPatient" placeholder="Search by name or patient ID...">
+                <button id="searchButton" class="btn">Search</button>
+            </div>
+            <div class="table-responsive">
+                <table id="patientList">
+                    <thead>
+                        <tr>
+                            <th>Patient ID</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>Department</th>
+                            <th>Contact Info</th>
+                            <th>Prescriptions</th>
+                            <th>Medical History</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td colspan="9" style="text-align: center;">Start typing in the search bar and click Search to find patients.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="analytics-section">
+            <h2>Patient Analytics</h2>
+            <div class="charts-container">
+                <div class="card chart-card">
+                    <h3>Gender Distribution</h3>
+                    <canvas id="genderDistributionChart"></canvas>
+                </div>
+                <div class="card chart-card">
+                    <h3>Department Distribution</h3>
+                    <canvas id="departmentDistributionChart"></canvas>
+                </div>
+                <div class="card chart-card">
+                    <h3>Frequent Visitors (Top 10)</h3>
+                    <canvas id="frequentVisitorsChart"></canvas>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+</body>
+</html>

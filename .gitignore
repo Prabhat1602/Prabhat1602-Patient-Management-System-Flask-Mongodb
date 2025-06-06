@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.pyc
+.Python
+env/
+venv/
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Flask specific
+instance/ # Contains sqlite.db if you used that, or other instance-specific configs
+.flaskenv
+flask_debug.log
+
+# Environment variables
+.env # If you store your SECRET_KEY or DB URI here
+
+# Database files (if you used SQLite instead of MongoDB, keep this)
+*.db
+*.sqlite
+*.sqlite3
+
+# Node.js (if you ever add frontend build tools like npm packages)
+node_modules/
+npm-debug.log
+yarn-debug.log
+.yarn/
+
+# MacOS
+.DS_Store
+
+# IDE-specific files (e.g., VS Code)
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Editor backup files
+*~
+.#*
+.#*#
+.fuse_hidden*
+.nfs*
